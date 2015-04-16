@@ -157,3 +157,73 @@ function AREAOFCIRCLE (radius)  {
   }
   return Math.PI * (radius * radius);
 }
+
+// Code Example 2.10
+/**
+ * Given a date, return the name of the day for that date.
+ *
+ * @param {Date} date
+ * @return {String}
+ * @customfunction
+ */
+function DAYNAME(date) {
+  var dayNumberNameMap = {
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Friday',
+    6: 'Saturday'},
+      dayName,
+      dayNumber;
+  if(! date.getDay ) {
+    throw TypeError('TypeError: Argument is not of type "Date"!');
+  }
+  dayNumber = date.getDay();
+  dayName = dayNumberNameMap[dayNumber];
+  return dayName;
+}
+
+
+// Code Example 2.11
+/**
+* Add a given number of days to the given date
+* and return the new date.
+*
+* @param {Date} date
+* @param {number} days
+* @return {Date}
+*/
+function addDays(date, days) {
+  // Taken from Stackoverflow:
+  // http://stackoverflow.com/questions/563406/add-days-to-datetime
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
+/**
+* Given a start date, an end date and a day name.
+* return an array of all dates that fall (inclusive)
+* between those two dates for the given day name.
+*
+* @param {Date} startDate
+* @param {Date} endDate
+* @param {String} dayName
+* @return {Date[]}
+* @customfunction
+*/
+function DATESOFDAY(startDate, endDate, dayName) {
+  var dayNameDates = [],
+      testDate = startDate,
+      testDayName;
+  while(testDate <= endDate) {
+    testDayName = DAYNAME(testDate);
+    if(testDayName.toLowerCase() === dayName.toLowerCase()) {
+      dayNameDates.push(testDate);
+    }
+    testDate = addDays(testDate, 1);
+  }
+  return dayNameDates;
+}
