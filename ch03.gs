@@ -61,8 +61,7 @@ function testFunc(arg1, arg2) {
   Logger.log('First Invocation:');
   testFunc('arg1', 2);
   Logger.log('Second Invocation:');
-  testFunc('arg1', 2, 'arg3', false, 
-            new Date(), null, undefined);
+  testFunc('arg1', 2, 'arg3', false, new Date(), null, undefined);
 }
 
 // Code Example 2.5
@@ -78,4 +77,83 @@ function adder(a, b) {
 function run_adder() {
   Logger.log(adder(1, 2));
   Logger.log(adder('cat', 1));
+}
+
+// Code Example 2.6
+// Function that checks that
+// both arguments are of type number.
+// Throws an error if this is not true.
+function adder(a, b) {
+  if (!(typeof a === 'number' && 
+        typeof b === 'number')) {
+    throw TypeError(
+          'TypeError: Both arguments must be numeric!');
+  }
+  return a + b;
+}
+
+// Test "adder()" with numeric arguments
+// Thrown error is caught, see logger.
+function run_adder() {
+  Logger.log(adder(1, 2));
+  try {
+    Logger.log(adder('cat', 1));
+  } catch (error) {
+    Logger.log(error.message);
+  }
+}
+
+// Code Example 2.7
+/*
+RSD Data (Paste this into a Google Sheet to test):
+19.81
+18.29
+21.47
+22.54
+20.17
+20.1
+17.61
+20.91
+21.62
+19.17
+*/
+/**
+ * Given the man and standard deviation
+ * return the relative standard deviation.
+ * 
+ * @param {number} stdev 
+ * @param {number} mean
+ * @return {number}
+ * @customfunction
+*/
+function RSD (stdev, mean) {
+  return 100 * (stdev/mean);
+}
+
+// Code Example 2.8
+/**
+ * Given a temperature in Celsius, return Fahrenheit value.
+ * @param {number} celsius
+ * @return {number}
+ * @customfunction
+ */
+function CELSIUSTOFAHRENHEIT(celsius) {
+  if (typeof celsius !== 'number') {
+    throw TypeError('Celsius value must be a number');
+  }
+  return ((celsius * 9) / 5) + 32;
+}
+
+// Code Example 2.9
+/**
+ * Given the radius, return the area of the circle.
+ * @param {number} radius
+ * @return {number}
+ * @customfunction
+ */
+function AREAOFCIRCLE (radius)  {
+  if (typeof radius !== 'number' || radius < 0){
+    throw Error('Radius must be a positive number');
+  }
+  return Math.PI * (radius * radius);
 }
