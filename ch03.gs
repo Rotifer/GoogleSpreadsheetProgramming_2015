@@ -227,3 +227,37 @@ function DATESOFDAY(startDate, endDate, dayName) {
   }
   return dayNameDates;
 }
+
+// Code Example 2.12
+/**
+ * Print all string properties to the 
+ *  Script Editor Logger
+ * @return {undefined}
+ */
+function printStringMethods() {
+  var strMethods = 
+    Object.getOwnPropertyNames(String.prototype);
+  Logger.log('String has ' +
+              strMethods.length +
+             ' properties.');
+  Logger.log(strMethods.sort().join('\n'));
+}
+
+// Code Example 2.13
+/**
+ * Given a string, return a new string
+ * with the characters in reverse order.
+ * 
+ * @param {String} str
+ * @return {String}
+ * @customfunction
+ */
+function REVERSESTRING(str) {
+  var strReversed = '',
+      lastCharIndex = str.length - 1,
+      i;
+  for (i = lastCharIndex; i >= 0; i -= 1) {
+    strReversed += str[i];
+  }
+  return strReversed;
+}
