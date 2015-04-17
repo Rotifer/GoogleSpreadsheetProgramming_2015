@@ -300,3 +300,75 @@ function CONCATRANGE(inputFromRng, concatStr,
  }
    return inputFromRng.join(concatStr);
 }
+
+// Code Example 2.16
+/**
+ * Return the ID of the active
+ *  spreadsheet.
+ * 
+ * @return {String}
+ * @customfunction
+ */
+function GETSPREADSHEETID() {
+  return SpreadsheetApp
+    .getActiveSpreadsheet().getId();
+}
+/**
+ Return the URL of the active
+ *  spreadsheet.
+ * 
+ * @return {String}
+ * @customfunction
+ */
+function GETSPREADSHEETURL() {
+  return SpreadsheetApp
+    .getActiveSpreadsheet().getUrl();
+}
+/**
+  Return the owner of the active
+ *  spreadsheet.
+ * 
+ * @return {String}
+ * @customfunction
+ */
+function GETSPREADSHEETOWNER() {
+  return SpreadsheetApp
+    .getActiveSpreadsheet().getOwner();
+}
+/**
+ Return the viewers of the active
+ *  spreadsheet.
+ * 
+ * @return {String}
+ * @customfunction
+ */
+function GETSPREADSHEETVIEWERS() {
+  var ss = 
+    SpreadsheetApp.getActiveSpreadsheet();
+  return ss.getViewers().join(', ');
+}
+/**
+ Return the locale of the active
+ *  spreadsheet.
+ * 
+ * @return {String}
+ * @customfunction
+ */
+function GETSPREADSHEETLOCALE() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  return ss.getSpreadsheetLocale();
+}
+
+// Code Example 2.17
+/**
+ * Return French version
+ * of English input.
+ * 
+ * @param {String} input
+ * @return {String}
+ * @customfunction
+ */
+function ENGLISHTOFRENCH(input) {
+  return LanguageApp
+    .translate(input, 'en', 'fr');
+}
