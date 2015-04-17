@@ -261,3 +261,42 @@ function REVERSESTRING(str) {
   }
   return strReversed;
 }
+
+// Code Example 2.14
+/**
+ * Simulate a throw of a die
+ * by returning a number between
+ * and 6.
+ * 
+ * @return {number}
+ * @customfunction
+ */
+function THROWDIE() {
+  return 1 + Math.floor(Math.random() * 6);
+}
+
+// Code Example 2.15
+/** Concatenate cell values from
+* an input range.
+* Single quotes around concatenated 
+* elements are optional.
+* 
+* @param {String[]} inputFromRng
+* @param {String} concatStr
+* @param {Boolean} addSingleQuotes
+* @return {String}
+* @customfunction
+*/
+function CONCATRANGE(inputFromRng, concatStr,
+                    addSingleQuotes) {
+  var cellValues;
+  if (addSingleQuotes) {
+    cellValues = 
+      inputFromRng.map(
+        function (element) {
+          return "'" + element + "'";
+        });
+    return cellValues.join(concatStr);
+ }
+   return inputFromRng.join(concatStr);
+}
