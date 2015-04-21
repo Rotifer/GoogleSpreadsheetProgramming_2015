@@ -61,3 +61,58 @@ function testSpreadsheet () {
        .setValue(spreadsheetProperties[i]);
   }
 }
+
+// Code Example 4.4
+//  Extract, an array of properties from a
+//   Sheet object.
+// Sort the array alphabetically using the
+//  Array sort() method.
+// Use the Array join() method to a create
+//   a string of all the Sheet properties
+//   separated by a new line.
+function printSheetProperties () {
+  var ss = 
+    SpreadsheetApp.getActiveSpreadsheet(),
+      sh = ss.getActiveSheet();
+  Logger.log(Object.keys(sh)
+             .sort().join('\n'));
+} 
+
+// Code Example 4.5
+// Call function listSheets() passing it the 
+//  Spreadsheet object for the active 
+//    spreadsheet.
+// The try - catch construct handles the 
+//  error thrown by listSheets() if the given
+// argument is absent or something
+//    other than a Spreadsheet object.
+function test_listSheets () {
+  var ss = 
+      SpreadsheetApp.getActiveSpreadsheet();
+  try {
+    listSheets(ss);
+  } catch (error) {
+    Logger.log(error.message);
+  }
+}
+// Given a Spreadsheet object, 
+//  print the names of its sheets
+//   to the logger.
+// Throw an error if the argument
+//   is missing or if it is not
+//  of type Spreadsheet.
+function listSheets (spreadsheet) {
+  var sheets,
+      i;
+  if (spreadsheet.toString()
+      !== 'Spreadsheet') {
+    throw TypeError(
+      'Function "listSheets" expects ' +
+      'argument of type "Spreadsheet"');
+  }
+  sheets = spreadsheet.getSheets();
+  for (i = 0; 
+       i < sheets.length; i += 1) {
+    Logger.log(sheets[i].getName());
+  }
+}
