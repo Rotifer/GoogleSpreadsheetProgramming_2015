@@ -116,3 +116,92 @@ function listSheets (spreadsheet) {
     Logger.log(sheets[i].getName());
   }
 }
+
+// Code Example 4.6
+// Create a Spreadsheet object and call 
+//  "sheetExists()" for an array of sheet 
+//  names to see if they exist in 
+//  the given spreadsheet.
+// Print the output to the log.
+function test_sheetExists () {
+  var ss = 
+      SpreadsheetApp.getActiveSpreadsheet(),
+      sheetNames = ['Sheet1', 
+                    'sheet1', 
+                    'Sheet2',
+                    'SheetX'],
+      i;
+  for (i = 0; 
+       i < sheetNames.length; 
+       i +=1) {
+    Logger.log('Sheet Name ' + 
+                sheetNames[i] + 
+               ' exists: ' + 
+                sheetExists(ss, 
+                      sheetNames[i]));
+  }
+}
+// Given a Spreadsheet object and a sheet name, 
+//  return "true" if the given sheet name exists
+//  in the given Spreadsheet, 
+//  else return "false".
+function sheetExists(spreadsheet, sheetName) {
+  if (spreadsheet.getSheetByName(sheetName)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Code Example 4.7
+// Copy the first sheet of the active
+//  spreadsheet to a newly created 
+//  spreadsheet.
+function copySheetToSpreadsheet () {
+  var ssSource = 
+     SpreadsheetApp.getActiveSpreadsheet(),
+      ssTarget = 
+      SpreadsheetApp.create(
+        'CopySheetTest'),
+      sourceSpreadsheetName =
+        ssSource.getName(),
+      targetSpreadsheetName = 
+        ssTarget.getName();
+  Logger.log(
+     'Copying the first sheet from ' + 
+            sourceSpreadsheetName + 
+            ' to ' + targetSpreadsheetName);
+  // [0] extracts the first Sheet object 
+  //   from the array created by
+  //   method call "getSheets()"
+  ssSource.getSheets()[0].copyTo(ssTarget);
+}
+
+// Code Example 4.8
+// Create a Sheet object and pass it 
+// as an argument to getSheetSummary().
+// Print the return value to the log.
+function test_getSheetSummary () {
+  var sheet = SpreadsheetApp
+             .getActiveSpreadsheet()
+             .getSheets()[0];
+  Logger.log(getSheetSummary(sheet));
+}
+// Given a Sheet object as an argument, 
+//  use Sheet methods to extract 
+//  information about it.
+// Collect this information into an object
+// literal and return the object literal.
+function getSheetSummary (sheet) {
+  var sheetReport = {};
+  sheetReport['Sheet Name'] = 
+     sheet.getName();
+  sheetReport['Used Row Count'] =
+     sheet.getLastRow();
+  sheetReport['Used Column count'] = 
+    sheet.getLastColumn();
+  sheetReport['Used Range Address'] = 
+   sheet.getDataRange().getA1Notation();
+  return sheetReport;
+}
+
