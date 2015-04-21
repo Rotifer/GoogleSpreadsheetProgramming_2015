@@ -1,6 +1,7 @@
-// Code Example 2.1
+// Code Example 3.1
 /**
-* Simple function that cannot be called from the spreadsheet as a user-defined function
+* Simple function that cannot be called from
+* the spreadsheet as a user-defined function
 * because it sets a spreadsheet property.
 *
 * @param {String} rangeAddress
@@ -11,7 +12,7 @@ function setRangeFontBold (rangeAddress) {
   sheet.getRange(rangeAddress).setFontWeight('bold');
 }
 
-// Code Example 2.2
+// Code Example 3.2
 /**
 * A function that demonstrates that function "setRangeFontBold()
 * is valid although it cannot be called as a user-defined function.
@@ -28,7 +29,7 @@ function call_setCellFontBold () {
   setRangeFontBold(rangeAddress);
 }
 
-// Code Example 2.3
+// Code Example 3.3
 /**
  * Function to demonstrate how to check
  * the number and types of passed arguments.
@@ -48,8 +49,6 @@ function testFunc(arg1, arg2) {
                       typeof arguments[i]);
   }
 }
-
-// Code Example 2.4
 /**
  * Function that calls "testFunc()"
  * twice with different argument types
@@ -64,7 +63,7 @@ function testFunc(arg1, arg2) {
   testFunc('arg1', 2, 'arg3', false, new Date(), null, undefined);
 }
 
-// Code Example 2.5
+// Code Example 3.4
 // Function that is expected
 // to add numbers but will also
 // "add" strings.
@@ -79,7 +78,7 @@ function run_adder() {
   Logger.log(adder('cat', 1));
 }
 
-// Code Example 2.6
+// Code Example 3.5
 // Function that checks that
 // both arguments are of type number.
 // Throws an error if this is not true.
@@ -103,7 +102,7 @@ function run_adder() {
   }
 }
 
-// Code Example 2.7
+// Code Example 3.6
 /*
 RSD Data (Paste this into a Google Sheet to test):
 19.81
@@ -130,7 +129,7 @@ function RSD (stdev, mean) {
   return 100 * (stdev/mean);
 }
 
-// Code Example 2.8
+// Code Example 3.7
 /**
  * Given a temperature in Celsius, return Fahrenheit value.
  * @param {number} celsius
@@ -144,7 +143,7 @@ function CELSIUSTOFAHRENHEIT(celsius) {
   return ((celsius * 9) / 5) + 32;
 }
 
-// Code Example 2.9
+// Code Example 3.8
 /**
  * Given the radius, return the area of the circle.
  * @param {number} radius
@@ -158,7 +157,7 @@ function AREAOFCIRCLE (radius)  {
   return Math.PI * (radius * radius);
 }
 
-// Code Example 2.10
+// Code Example 3.9
 /**
  * Given a date, return the name of the day for that date.
  *
@@ -186,7 +185,7 @@ function DAYNAME(date) {
 }
 
 
-// Code Example 2.11
+// Code Example 3.10
 /**
 * Add a given number of days to the given date
 * and return the new date.
@@ -228,7 +227,7 @@ function DATESOFDAY(startDate, endDate, dayName) {
   return dayNameDates;
 }
 
-// Code Example 2.12
+// Code Example 3.11
 /**
  * Print all string properties to the 
  *  Script Editor Logger
@@ -243,7 +242,7 @@ function printStringMethods() {
   Logger.log(strMethods.sort().join('\n'));
 }
 
-// Code Example 2.13
+// Code Example 3.12
 /**
  * Given a string, return a new string
  * with the characters in reverse order.
@@ -262,7 +261,7 @@ function REVERSESTRING(str) {
   return strReversed;
 }
 
-// Code Example 2.14
+// Code Example 3.13
 /**
  * Simulate a throw of a die
  * by returning a number between
@@ -275,7 +274,7 @@ function THROWDIE() {
   return 1 + Math.floor(Math.random() * 6);
 }
 
-// Code Example 2.15
+// Code Example 3.14
 /** Concatenate cell values from
 * an input range.
 * Single quotes around concatenated 
@@ -301,7 +300,7 @@ function CONCATRANGE(inputFromRng, concatStr,
    return inputFromRng.join(concatStr);
 }
 
-// Code Example 2.16
+// Code Example 3.15
 /**
  * Return the ID of the active
  *  spreadsheet.
@@ -359,7 +358,7 @@ function GETSPREADSHEETLOCALE() {
   return ss.getSpreadsheetLocale();
 }
 
-// Code Example 2.17
+// Code Example 3.16
 /**
  * Return French version
  * of English input.
