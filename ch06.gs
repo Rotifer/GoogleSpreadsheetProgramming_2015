@@ -36,10 +36,26 @@ function getConnection(host, user, pwd, dbName, port) {
 * @return {JdbcConnection}
 */
 function getConnectionToMyDB() {
-  var scriptProperties = PropertiesService.getScriptProperties(),
-      pwd = scriptProperties.getProperty('MYSQL_CLOUD_PWD'),
+  var scriptProperties = 
+        PropertiesService.getScriptProperties(),
+      pwd = 
+        scriptProperties.getProperty('MYSQL_CLOUD_PWD'),
       user = 'sql562209',
       dbName = 'sql562209',
       host = 'sql5.freemysqlhosting.net',
-      port = 3306;  
+      port = 3306,
+      connection;
+  connection = getConnection(host, user, pwd, dbName, port);
+  return connection;
+}
+/***
+* Test getConnectionToMyDB()
+* Prints "JdbcConnection" and closes 
+* the Connection object.
+*
+*/
+function test_getConnectionToMyDB() {
+  var connection = getConnectionToMyDB();
+  Logger.log(connection);
+  connection.close();
 }
