@@ -101,7 +101,8 @@ function createTable() {
 function populateTable() {
   var connection,
       stmt,
-      sql;
+      sql,
+      rowInsertedCount;
   sql = "INSERT INTO people(first_name, surname, gender, height_meter, dob) VALUES\n"
             + "('John', 'Browne', 'Male', 1.81, '1980-05-03'),\n"
             + "('Rosa', 'Hernandez', 'Female', 1.70, '1981-04-30'),\n"
@@ -110,8 +111,8 @@ function populateTable() {
   try {
     connection = getConnectionToMyDB();
     stmt = connection.createStatement();
-    stmt.execute(sql);
-    Logger.log('Values inserted!');
+    rowInsertedCount = stmt.executeUpdate(sql);
+    Logger.log(rowInsertedCount + ' values inserted!');
   } catch (e) {
     Logger.log(e);
     throw e;
