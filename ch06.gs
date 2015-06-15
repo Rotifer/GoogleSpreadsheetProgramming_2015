@@ -205,7 +205,6 @@ function deleteTableRow() {
     try {
     connection = getConnectionToMyDB();
     stmt = connection.createStatement();
-    // Using executeUpdate() method here.
     deleteRowCount = stmt.executeUpdate(sql);
     Logger.log('Deleted row count = ' + deleteRowCount);
   } catch (e) {
