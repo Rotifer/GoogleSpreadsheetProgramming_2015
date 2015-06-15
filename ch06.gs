@@ -169,15 +169,15 @@ function selectFromTable() {
 function updateTable() {
   var connection,
       stmt,
-      sql;
+      sql,
+      updateRowCount;
   sql = "UPDATE people SET gender = 'Female'\n"
        + "WHERE first_name = 'Mary' AND surname = 'Carr'";
     try {
     connection = getConnectionToMyDB();
     stmt = connection.createStatement();
-    // Could also use executeUpdate() method here.
-    stmt.execute(sql);
-    Logger.log('Table updated!');
+    updateRowCount = stmt.executeUpdate(sql);
+    Logger.log(updateRowCount + ' rows updated!');
   } catch (e) {
     Logger.log(e);
     throw e;
