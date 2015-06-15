@@ -93,8 +93,10 @@ function createTable() {
 
 // Code example 6.4
 /**
+* Execute a single SQL INSERT statement to
+* add the table created by code example 6.3.
 *
-*
+* @return {undefined}
 */
 function populateTable() {
   var connection,
@@ -182,12 +184,6 @@ function updateTable() {
     connection.close();
   }
 }
-
-// Delete row
-// Exception: Can not issue data manipulation statements with executeQuery().
-// First run gives log: Deleted row count = 1
-// Second run gives log:  Deleted row count = 0
-// http://code.rohitink.com/2013/06/12/mysql-integer-float-decimal-data-types-differences/
 
 // Code Example 6.7
 /**
