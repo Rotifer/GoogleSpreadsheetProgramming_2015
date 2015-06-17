@@ -239,3 +239,36 @@ function dropTable() {
   }
 }
 
+// Code Example 6.9
+/**
+* Demonstrate the use of a prepared statement.
+* 
+* Prints the name of an emplyee for a 
+*  given parameter.
+* @return {undefined}
+*/
+function runPrepStmt() {
+  var connection,
+      pStmt,
+      sql,
+      rs,
+      rsmd,
+      i,
+      empName;
+  sql = 'SELECT ename FROM emp WHERE empno = ?';
+  try {
+    connection = getConnectionToMyDB();
+    pStmt = connection.prepareStatement(sql);
+    pStmt.setInt(1, 7839);
+    rs = pStmt.executeQuery();
+    rs.next();
+    empName = rs.getString(1);
+    Logger.log(empName);
+  } catch (e) {
+    Logger.log(e);
+    throw e;
+  } finally {
+    connection.close();
+  }
+}
+
