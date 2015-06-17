@@ -289,5 +289,5 @@ function demoTransactions() {
   stmt = connection.createStatement();
   stmt.executeUpdate(sql);
   connection.rollback();
-  connection.close() 
+  connection.close();
 }
