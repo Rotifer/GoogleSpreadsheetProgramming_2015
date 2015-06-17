@@ -252,8 +252,6 @@ function runPrepStmt() {
       pStmt,
       sql,
       rs,
-      rsmd,
-      i,
       empName;
   sql = 'SELECT ename FROM emp WHERE empno = ?';
   try {
@@ -272,3 +270,24 @@ function runPrepStmt() {
   }
 }
 
+// Code Example 6.10
+/**
+* Show effect if switching off auto-commit.
+*
+* Give emplyee number 7900 ("JAMES") a 
+* 100-fold pay increase!
+* But the change is "rolled back".
+* Try changing "connection.rollback()" to
+*  "connection.commit()" and see the effect.
+*/
+function demoTransactions() {
+  var connection,
+      stmt,
+      sql = 'UPDATE emp SET sal = sal * 100 WHERE empno = 7900';
+  connection = getConnectionToMyDB();
+  connection.setAutoCommit(false);
+  stmt = connection.createStatement();
+  stmt.executeUpdate(sql);
+  connection.rollback();
+  connection.close() 
+}
