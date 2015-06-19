@@ -34,3 +34,17 @@ INSERT INTO emp VALUES(7900, 'JAMES',  'CLERK',     7698, '1981-12-3',   950, NU
 INSERT INTO emp VALUES(7902, 'FORD',   'ANALYST',   7566, '1981-12-3',  3000, NULL, 20);
 INSERT INTO emp VALUES(7934, 'MILLER', 'CLERK',     7782, '1982-1-23', 1300, NULL, 10);
 
+-- Code Example 6.11
+SELECT
+  tab.table_name,
+  tab.engine,
+  tab.table_rows,
+  col.column_name,
+  col.column_type
+FROM
+  INFORMATION_SCHEMA.TABLES AS tab
+  JOIN INFORMATION_SCHEMA.COLUMNS AS col
+    ON tab.table_name = col.table_name
+WHERE
+  tab.table_type = 'BASE TABLE';
+  
