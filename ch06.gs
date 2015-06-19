@@ -311,3 +311,156 @@ function printConnectionMetaData() {
   Logger.log('Product Version: ' + metadata.getDatabaseProductVersion());
   Logger.log('Supports transactions: ' + metadata.supportsTransactions());
 }
+
+// Code Example 6.13
+/**
+* Return a ResultSet
+*
+* @param {JdbcConnection} conn
+* @param {number} deptno
+* @return {JdbcResultSet}
+*/
+function getResSetForDept(conn, deptno) {
+  var sql = ('SELECT\n' +
+              '  e.ename,\n' +
+              '  e.hiredate,\n' +
+              '  e.job,\n' +
+              '  e.sal,\n' +
+              '  d.dname\n' + 
+              'FROM\n' +
+              '  emp e\n' +
+              '  JOIN dept d ON e.deptno = d.deptno\n' +
+              'WHERE\n' +
+              '  d.deptno = ?'),
+      pStmt = conn.prepareStatement(sql),
+      rs;
+  pStmt.setInt(1, deptno);
+  recset = pStmt.executeQuery();
+  return recset;
+}
+
+// code Example 6.14
+/**
+* Return the column names for
+* given ResultSet
+* @param {JdbcResultSet} rs
+* @return {String[]}
+*/
+function getColNames(rs) {
+  var md = rs.getMetaData(),
+      colCount = md.getColumnCount(),
+      colNames = [],
+      colName,
+      i;
+  for(i = 1; i <= colCount; i +=1) {
+    colName = md.getColumnName(i);
+    colNames.push(colName);
+  }
+  return colNames;
+}
+// code Example 6.15
+/**
+* Return the data rows as an array-of-arrays
+* for the given ResultSet
+* @param {JdbcResultSet} rs
+* @return {String[]}
+*/
+function getDataRows(rs) {
+  var md = rs.getMetaData(),
+      colCount = md.getColumnCount(),
+      row = [],
+      value,
+      dataRows = [],
+      colName,
+      i;
+  while(rs.next()) {
+    row = [];
+    for(i = 1; i <= colCount; i +=1) {
+      value = rs.getString(i);
+      row.push(value);
+    }
+    dataRows.push(row);
+  }
+  return dataRows;  
+}
+// code Example 6.16
+/**
+* Check if given sheet name
+* exists in the active spreadsheet.
+* @param {String} sheetName
+* @return {boolean}
+*/
+function sheetExists(sheetName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(),
+      sheets = ss.getSheets(),
+      i;
+  for(i = 0; i < sheets.length; i += 1) {
+    if( sheets[i].getSheetName() == sheetName) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Code Example 6.17
+/**
+* Delete sheet with given name
+* and replace it with new one
+* with same name.
+* @param {String} sheetName
+* @return {Sheet}
+*/
+function replaceOldSheet(sheetName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(),
+      sh = ss.getSheetByName(sheetName);
+  ss.deleteSheet(sh);
+  sh = ss.insertSheet(sheetName);
+  return sh
+}
+// Code Example 6.18
+/**
+* Create a sheet with the given name
+* in the active spreadsheet
+* @param {String} sheetName
+* @return {Sheet}
+*/
+function addNewSheet(sheetName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(),
+      sh = ss.insertSheet(sheetName);
+  return sh;
+}
+// Code Example 6.19
+/**
+* Run application to extract a set of
+* rows from the database and write them
+* to a new sheet.
+* @return {undefined}
+*/
+function main() {
+  var conn = getConnectionToMyDB(),
+      deptno = 20,
+      rs = getResSetForDept(conn, deptno),
+      colNames = getColNames(rs),
+      dataRows = getDataRows(rs),
+      sheetName = 'RESEARCH',
+      sh,
+      dataRowCount = dataRows.length,
+      dataColCount = colNames.length,
+      outputHeaderRng,
+      outputDataRng;
+  if(sheetExists(sheetName)) {
+     sh = replaceOldSheet(sheetName)
+  } else {
+    sh = addNewSheet(sheetName);
+  }
+  outputHeaderRng = sh.getRange(1,1,1,dataColCount);
+  outputHeaderRng.setFontWeight('bold');
+  outputDataRng = sh.getRange(2, 
+                          1, 
+                          dataRowCount, 
+                          dataColCount);
+  outputHeaderRng.setValues([colNames]);
+  outputDataRng.setValues(dataRows);
+  rs.close();
+  conn.close();
+}
