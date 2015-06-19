@@ -291,3 +291,23 @@ function demoTransactions() {
   connection.rollback();
   connection.close();
 }
+
+
+// Code Example 6.11 - see file "ch06.sql".
+
+// Code Example 6.12
+/**
+*Print some information about
+* the target database to the logger.
+*
+* @return {undefined}
+*/
+function printConnectionMetaData() {
+  var connection = getConnectionToMyDB(),
+      metadata = connection.getMetaData();
+  Logger.log('Major Version: ' + metadata.getDatabaseMajorVersion());
+  Logger.log('Minor Version: ' + metadata.getDatabaseMinorVersion());
+  Logger.log('Product Name: '  + metadata.getDatabaseProductName());
+  Logger.log('Product Version: ' + metadata.getDatabaseProductVersion());
+  Logger.log('Supports transactions: ' + metadata.supportsTransactions());
+}
