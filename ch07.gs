@@ -1,4 +1,4 @@
-// code Example 7.1
+// Code Example 7.1
 /**
 * Function "onOpen()" is executed when a Sheet is opened.
 * The "onOpen()" function given here adds a menu to the menu bar
