@@ -1,0 +1,19 @@
+<!-- Code Example 7.2 -->
+<div>
+  <b>Add Row To Spreadsheet</b><br />
+  <form>
+    First name: <br />
+    <input id="firstname" name="firstName" type="text" />
+    <br />
+    Last name: <br />
+    <input id="lastname" name="lastName" type="text" />
+    <br />
+   <input onclick="formSubmit()" type="button" value="Add Row" />
+   <input onclick="google.script.host.close()" type="button" value="Exit" />
+  </form>
+  <script type="text/javascript">
+        function formSubmit() {
+            google.script.run.getValuesFromForm(document.forms[0]);
+        }
+  </script>
+</div>
