@@ -52,3 +52,68 @@ index.html
    <input onclick="google.script.host.close()" type="button" value="Exit" />
   </form>
 </div>
+
+<!-- Code example 7-4 -->
+<style>
+  div {
+    background-color: #DCDCDC;
+  }
+  fieldset {
+    display: inline;
+    font-weight: bold;
+  }
+  label {
+    clear: left;
+    float: left;
+    width: 10em; 
+    text-align: right; 
+    margin-right: 1em;
+    font-weight: bold;
+  }
+  input {
+    background-color: #FFFFFF;
+    width: 14em;
+    float: left; 
+  }
+  .button {
+    float: left;
+    margin-left: 5em;
+    background-color: #FFFFFF; 
+    color: 000000;
+    margin-top: 1em;
+    font-weight: bold;
+  }
+</style>
+<div>
+  <form>
+    <fieldset>
+      <legend>GUI Input</legend>
+      <label>First Name</label>
+      <input type="text" id="first-name" name="firstName"/>
+      <label>Last Name</label>
+      <input type="text" id="last-name" name="lastName"/>      
+      <label>Address</label>
+      <input type = "text" id = "user-address" name="userAddress"/>
+      <label>Zip Code</label>
+      <input type=text id="zip-code" name="zipCode" pattern="(\d{5}([\-]\d{4})?)" 
+                          placeholder="US Zip Code Only"/>
+      <label>Phone</label>
+      <input type="text" id="user-phone" name="userPhone" 
+                         placeholder="US phone number"/>
+      <label>Choose A Date</label>
+      <input type="date" id="chosen-date" name="chosenDate" 
+                         placeholder="Pick a date"/>
+      <label>User Email</label>
+      <input type="email" id="user-email" name="userEmail" 
+                          placeholder="user@domain.com" required/>
+      <input onclick="formSubmit()" type="button" value="Add Row" class="button"/>
+     <input onclick="google.script.host.close()" type="button" 
+            value="Exit" class="button"/>
+    </fieldset>
+  </form>
+</div>
+<script type="text/javascript">
+  function formSubmit() {
+    google.script.run.getValuesFromForm(document.forms[0]);
+  }
+</script>
