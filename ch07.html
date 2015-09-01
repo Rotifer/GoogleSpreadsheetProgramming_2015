@@ -117,3 +117,52 @@ index.html
     google.script.run.getValuesFromForm(document.forms[0]);
   }
 </script>
+
+<!--
+Code Example 7-6
+Creates a GUI that gets the dropdown list elements from a Google Spreadsheet
+named range. As values are aded to, the range name is re-assigned to include
+the added values.
+-->
+<p>Getting Dropdown Values From Spreadsheet Dynamically </p>
+<hr>
+<div>
+  <form>
+    <table>
+      <tr>
+        <td>Select A City</td><td><select id="city_list"></select></td>
+      </tr>
+      <tr>
+        <td>Add other form elements here</td><td><input 
+          onclick="google.script.host.close()" 
+          type="button" value="Exit" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script type="text/javascript">
+    // Client-side JavaScript that uses the list returned by
+    // GAS function "getValuesForRngName()" to populate the dropdown.
+    // This is standard client-side JavaScript programming that uses
+    // DOM manipulation to get page elements and manipulate them.
+    function onSuccess(values) {
+      var opt,
+          dropDown;
+        for(i = 0;i < values.length; i +=1){
+          dropDown = document.getElementById("city_list");
+          opt = document.createElement("option");
+          dropDown.options.add(opt);
+          // Remember that GAS Range method "GetValues()" returns
+          // an array of arrays, hence two array indexes "[i][0]" here.
+          opt.text = values[i][0];
+          opt.value = values[i][0];
+       }
+    }
+    function populate(){
+      google.script.run.withSuccessHandler(onSuccess).getValuesForRngName('Cities');
+    }
+</script>
+<script>
+  // Using the "load" event to execute the function "populate"
+  window.addEventListener('load', populate);
+</script>
