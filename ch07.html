@@ -20,3 +20,34 @@ index.html
         }
   </script>
 </div>
+
+<!-- Code Example 7.3 -->
+<div>
+  <p><b>Form using table for layout</b></p>
+  <hr />
+  <form>
+    <table>
+      <tr>
+        <td>Database Table Name:</td>
+        <td><input id="table_name" name="table_name" type="text" /></td>
+      </tr>
+      <tr>
+        <td>Relational Database Name:</td><td><select name="rdbms_name" id="rdbms_name">
+                                            <option value="postgres">PostgrSQL</option>
+                                            <option value="mysql">MySQL</option>
+                                            <option value="sqlite">SQLite</option>
+                                            </select></td>
+     </tr>
+     <tr>
+      <td>Name For New Spreadsheet:</td>
+      <td><input id="new_spreadsheet_name" name="new_spreadsheet_name" type="text" /></td>
+     </tr>
+    <tr>
+      <td>Name For New Sheet:</td>
+      <td><input id="new_sheet_name" name="new_sheet_name" type="text" /></td>
+    </tr>
+  </table>
+   <input onclick="alert('Clicked button')" type="button" value="Make SQL" />
+   <input onclick="google.script.host.close()" type="button" value="Exit" />
+  </form>
+</div>
