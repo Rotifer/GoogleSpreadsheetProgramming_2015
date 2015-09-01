@@ -60,3 +60,28 @@ function getValuesFromForm(form){
       sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   sheet.appendRow([firstName, lastName]);
 }
+
+// GAS Code: Example 7-4
+// Show the web data entry form
+function showForm() {
+     var ss = SpreadsheetApp.getActiveSpreadsheet(),
+         html = HtmlService.createHtmlOutputFromFile('index')
+                .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+  html.setWidth(500);
+  html.setHeight(250);
+  ss.show(html);
+}
+// Get values from submitted HTML form
+function getValuesFromForm(form){
+  var firstName = form.firstName,
+      lastName = form.lastName,
+      userAddress = form.userAddress,
+      zipCode = form.zipCode,
+      userPhone = form.userPhone,
+      chosenDate = form.chosenDate,
+      userEmail = form.userEmail,
+      sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([firstName, lastName, 
+                   userAddress, zipCode, 
+                   userPhone, chosenDate, userEmail]);
+}
