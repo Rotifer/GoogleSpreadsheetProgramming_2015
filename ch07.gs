@@ -85,3 +85,40 @@ function getValuesFromForm(form){
                    userAddress, zipCode, 
                    userPhone, chosenDate, userEmail]);
 }
+
+// Code Example 7-5
+// Add some dummy data to the active sheet.
+// Data from "http://www.w3schools.com/html/html_tables.asp"
+function addRows() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(),
+      sheet = ss.getActiveSheet(),
+      rows = [['Number', 'First Name', 'Last Name', 'Points'],
+             [1, 'Eve', 'Jackson', 94],
+             [2, 'John', 'Doe', 80],
+             [3, 'Adam', 'Johnson', 67],
+             [4, 'Jill', 'Smith', 50]],
+      rng,
+      rngName = 'Input';
+  rows.forEach(function(row) {
+    sheet.appendRow(row);
+  });
+  rng = sheet.getDataRange();
+  ss.setNamedRange(rngName, rng);
+}
+
+// Take the template file and fill in the data
+// in range named "Input".
+// Display the data as a sidebar.
+function displayDataAsSidebar() {
+  var html = HtmlService.createTemplateFromFile('DummyData'); 
+  SpreadsheetApp.getUi() 
+      .showSidebar(html.evaluate());
+}
+// Return the data in the range named "Input"
+// as an array-of arrays.
+function getData(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet(),
+      rng = ss.getRangeByName('Input'),
+  data = rng.getValues(); 
+  return data;
+}
