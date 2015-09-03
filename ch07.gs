@@ -157,3 +157,14 @@ function getData(){
   data = rng.getValues(); 
   return data;
 }
+
+// Code Example 7-7
+// Display a GUI that uses Bootstrap to do the form styling
+function displayGUI() {
+  var ss,
+      html;
+  ss = SpreadsheetApp.getActiveSpreadsheet();
+  html = HtmlService.createHtmlOutputFromFile('index')
+       .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+  ss.show(html);
+}
