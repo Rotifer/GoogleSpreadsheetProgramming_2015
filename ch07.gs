@@ -105,7 +105,6 @@ function addRows() {
   rng = sheet.getDataRange();
   ss.setNamedRange(rngName, rng);
 }
-
 // Take the template file and fill in the data
 // in range named "Input".
 // Display the data as a sidebar.
@@ -141,21 +140,12 @@ function getValuesForRngName(rngName) {
 //Expand the range defined by the name as rows are added
 function setRngName() {
   var ss = SpreadsheetApp.getActiveSpreadsheet(),
-      sh = ss.getSheetByName('DropdownValues'),
+      sh = ss.getActiveSheet(),
       firstCellAddr = 'A2',
       dataRngRowCount = sh.getDataRange().getLastRow(),
       listRngAddr = (firstCellAddr + ':A' + dataRngRowCount),
       listRng = sh.getRange(listRngAddr);
   ss.setNamedRange('Cities', listRng);
-}
-
-// Return the data in the range named "Input"
-// as an array-of arrays.
-function getData(){
-  var ss = SpreadsheetApp.getActiveSpreadsheet(),
-      rng = ss.getRangeByName('Input'),
-  data = rng.getValues(); 
-  return data;
 }
 
 // Code Example 7-7
