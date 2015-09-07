@@ -166,6 +166,46 @@ the added values.
   // Using the "load" event to execute the function "populate"
   window.addEventListener('load', populate);
 </script>
+<!-- Code Example 7-6 (alternative form)
+Alternative to drop-down-list code above.
+This example adds a set of radio button options to a form
+It uses the same spreadsheet range and GAS code as above
+example.
+-->
+<p>Getting Radio Button Values From Spreadsheet Dynamically </p>
+<hr>
+<div>
+<form id='test_btn_add'>
+</form> 
+</div>
+<script type="text/javascript">
+    // Add a set of radio buttons based on range values.
+    function onSuccess(values) {
+      var radioInput,
+          form = document.getElementById('test_btn_add'),
+          label;
+        for(var i = 0;i < values.length; i +=1){
+          //alert(values[i][0]);
+          label = document.createElement("label");
+          radioInput = document.createElement('input');
+          radioInput.setAttribute('type', 'radio');
+          radioInput.setAttribute('name', 'cities');
+          radioInput.setAttribute('id', 'cities');
+          radioInput.setAttribute('value', values[i][0]);
+          label.appendChild(radioInput);
+          label.innerHTML += values[i][0];
+          form.appendChild(label);
+       }
+    }
+    function populate(){
+      google.script.run.withSuccessHandler(onSuccess).getValuesForRngName('Cities');
+    }
+</script>
+<script>
+  // Using the "load" event to execute the function "populate"
+  window.addEventListener('load', populate);
+</script>
+
 
 <!--
 Code Example 7-7
