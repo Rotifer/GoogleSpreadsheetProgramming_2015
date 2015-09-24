@@ -21,11 +21,11 @@ function listDriveFolders() {
 // Write the names of files in the user's
 // Google Drive to the logger.
 function listDriveFiles() {
-  var filesIt = DriveApp.getFiles(),
+  var fileIt = DriveApp.getFiles(),
       file;
   Logger.log("File Names:");
-  while (filesIt.hasNext()) {
-    file = filesIt.next()
+  while (fileIt.hasNext()) {
+    file = fileIt.next()
     Logger.log(file.getName());
   }
 }
