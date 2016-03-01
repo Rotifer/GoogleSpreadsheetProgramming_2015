@@ -1,3 +1,6 @@
+// CHAPTER NOT YET RELEASED!
+
+
 // ####### Code Example 10.1 #######
 
 // The first version of a GAS application to select a random
